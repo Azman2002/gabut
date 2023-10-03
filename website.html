@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Absensi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .absensi-form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .absensi-log {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistem Absensi</h1>
+    <div class="absensi-form">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" placeholder="Masukkan Nama">
+        <button id="absenBtn">Absen</button>
+    </div>
+    <div class="absensi-log">
+        <h2>Log Absensi:</h2>
+        <ul id="logList">
+            <!-- Log Absensi akan muncul di sini -->
+        </ul>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const absenBtn = document.getElementById("absenBtn");
+            const namaInput = document.getElementById("nama");
+            const logList = document.getElementById("logList");
+
+            absenBtn.addEventListener("click", function () {
+                const nama = namaInput.value.trim();
+                if (nama !== "") {
+                    const waktuAbsen = new Date();
+                    const logItem = document.createElement("li");
+                    logItem.innerText = `${nama} absen pada ${waktuAbsen.toLocaleTimeString()}`;
+                    logList.appendChild(logItem);
+                    namaInput.value = "";
+                } else {
+                    alert("Masukkan nama Anda.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
