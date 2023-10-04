@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Absensi</title>
+    <title>Absensi Otomatis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
 
-        h1 {
-            color: #333;
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .absensi-form {
-            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         label {
-            font-weight: bold;
             margin-right: 10px;
         }
 
         input[type="text"] {
             padding: 5px;
-            margin-right: 10px;
+            width: 200px;
         }
 
         button {
             padding: 5px 10px;
             background-color: #333;
-            color: #fff;
+            color: white;
             border: none;
             cursor: pointer;
         }
@@ -46,41 +61,43 @@
         }
 
         li {
-            margin-bottom: 5px;
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <h1>Sistem Absensi</h1>
-    <div class="absensi-form">
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" placeholder="Masukkan Nama">
-        <button id="absenBtn">Absen</button>
-    </div>
-    <div class="absensi-log">
-        <h2>Log Absensi:</h2>
-        <ul id="logList">
-            <!-- Log Absensi akan muncul di sini -->
-        </ul>
-    </div>
+    <header>
+        <h1>Absensi Otomatis</h1>
+    </header>
+    <main>
+        <div class="absensi-form">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" placeholder="Masukkan Nama">
+            <button id="absen">Absen</button>
+        </div>
+        <div class="absensi-log">
+            <h2>Log Absensi:</h2>
+            <ul id="log-list">
+                <!-- Log absensi akan ditampilkan di sini -->
+            </ul>
+        </div>
+    </main>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const absenBtn = document.getElementById("absenBtn");
-            const namaInput = document.getElementById("nama");
-            const logList = document.getElementById("logList");
+        const namaInput = document.getElementById('nama');
+        const absenButton = document.getElementById('absen');
+        const logList = document.getElementById('log-list');
 
-            absenBtn.addEventListener("click", function () {
-                const nama = namaInput.value.trim();
-                if (nama !== "") {
-                    const waktuAbsen = new Date();
-                    const logItem = document.createElement("li");
-                    logItem.innerText = `${nama} absen pada ${waktuAbsen.toLocaleTimeString()}`;
-                    logList.appendChild(logItem);
-                    namaInput.value = "";
-                } else {
-                    alert("Masukkan nama Anda.");
-                }
-            });
+        absenButton.addEventListener('click', () => {
+            const nama = namaInput.value;
+            if (nama.trim() === '') {
+                alert('Silakan masukkan nama Anda.');
+            } else {
+                const waktuAbsen = new Date().toLocaleTimeString();
+                const listItem = document.createElement('li');
+                listItem.textContent = `${nama} absen pada ${waktuAbsen}`;
+                logList.appendChild(listItem);
+                namaInput.value = '';
+            }
         });
     </script>
 </body>
